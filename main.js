@@ -2,18 +2,22 @@ const progress = document.getElementById('progress');
 const nextBtn = document.getElementById('next');
 const prevBtn = document.getElementById('prev');
 const circles = document.querySelectorAll('.circle');
+const texts = document.querySelectorAll('.text');
 
 let currentActive = 1;
+let currentDark = 1
 
 nextBtn.addEventListener('click', () => {
+    
     currentActive++
     
-    if(currentActive > circles.length) {
+    if(currentActive > circles.length && currentDark > texts.length) {
         currentActive =  circles.length;
+        currentDark =  texts.length;
     }
-
-    update()
     
+    update()
+
     
 })
 prevBtn.addEventListener(('click'), () => {
@@ -23,7 +27,7 @@ prevBtn.addEventListener(('click'), () => {
         currentActive = 1;
 
     }
-
+    
     update()
 })
 
@@ -32,10 +36,21 @@ function update() {
         if(idx < currentActive){
             circle.classList.add('active')
             
+            
         }else {
             circle.classList.remove('active')
         }
     })
+    texts.forEach((text, idx) => {
+        if(idx < currentActive){
+            text.classList.add('dark')
+            
+            
+        }else {
+            text.classList.remove('dark')
+        }
+    })
+
 
     const actives = document.querySelectorAll('.active');
 
@@ -53,3 +68,4 @@ function update() {
 
     console.log(prevBtn)
 }
+
